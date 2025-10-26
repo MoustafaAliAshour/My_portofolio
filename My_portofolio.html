@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moustafa Ali Ashour - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            padding: 3rem 2rem;
+            z-index: 1000;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .profile-section h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-section p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .nav-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-menu a {
+            color: #a0a0a0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+
+        .nav-menu i {
+            width: 20px;
+        }
+
+        .social-sidebar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-sidebar a {
+            color: #a0a0a0;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-sidebar a:hover {
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 3rem 4rem;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 2rem 0;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: slideInLeft 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease 0.2s;
+            animation-fill-mode: backwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #c0c0c0;
+            max-width: 700px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease 0.4s;
+            animation-fill-mode: backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideInLeft 1s ease 0.6s;
+            animation-fill-mode: backwards;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            color: #667eea;
+            border-color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c0c0c0;
+        }
+
+        .about-highlights {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .about-highlights h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlights ul {
+            list-style: none;
+        }
+
+        .about-highlights li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #c0c0c0;
+        }
+
+        .about-highlights li:last-child {
+            border-bottom: none;
+        }
+
+        .about-highlights i {
+            color: #667eea;
+            margin-right: 1rem;
+        }
+
+        .skills-container {
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            margin-bottom: 3rem;
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #e0e0e0;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-badge:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .project-card h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .experience-timeline {
+            position: relative;
+            margin-top: 3rem;
+            padding-left: 3rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 2rem;
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid #0a0a0a;
+        }
+
+        .timeline-date {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item ul {
+            margin-left: 1.5rem;
+            color: #c0c0c0;
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .contact-item-text {
+            flex: 1;
+        }
+
+        .contact-item-text h4 {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item-text p {
+            color: #a0a0a0;
+            font-size: 0.85rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 250px;
+                padding: 2rem;
+            }
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<aside class="sidebar">
+    <div class="profile-section">
+        <div class="profile-img">MA</div>
+        <h2>Moustafa Ashour</h2>
+        <p>AI & ML Engineer</p>
+    </div>
+
+    <ul class="nav-menu">
+        <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+        <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+        <li><a href="#projects"><i class="fas fa-briefcase"></i> Projects</a></li>
+        <li><a href="#experience"><i class="fas fa-graduation-cap"></i> Experience</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+
+    <div class="social-sidebar">
+        <a href="mailto:es-moustafa.aly2027@alexu.edu.eg"><i class="fas fa-envelope"></i></a>
+        <a href="https://linkedin.com/in/moustafa-ashour0" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/MoustafaAliAshour" target="_blank"><i class="fab fa-github"></i></a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <section id="home" class="section hero-section">
+        <h1 class="hero-title">Transforming Data<br>Into Intelligence</h1>
+        <p class="hero-subtitle">Computer & Communications Engineering Student | AI & ML Specialist</p>
+        <p class="hero-description">
+            Passionate about building intelligent systems that solve real-world problems.
+            Specializing in machine learning, deep learning, and full-stack development with
+            a track record of deploying high-accuracy models and scalable applications.
+        </p>
+        <div class="cta-buttons">
+            <a href="#projects" class="btn-primary">View My Work</a>
+            <a href="#contact" class="btn-secondary">Get In Touch</a>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number">3.6</div>
+                <div class="stat-label">GPA</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">97.6%</div>
+                <div class="stat-label">Model Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">Top 5%</div>
+                <div class="stat-label">DEPI Ranking</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">96K+</div>
+                <div class="stat-label">Records Analyzed</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    I'm a results-driven Computer and Communications Engineering student at the University of Alexandria,
+                    currently in my third year with a strong focus on Artificial Intelligence and Machine Learning.
+                </p>
+                <p style="margin-top: 1rem;">
+                    My journey in AI has been marked by hands-on experience in building and deploying machine learning models
+                    that achieve exceptional accuracy rates. Through the Digital Egypt Pioneers Initiative, I've honed my
+                    skills in data science, model optimization, and creating user-friendly applications that make AI accessible.
+                </p>
+                <p style="margin-top: 1rem;">
+                    I'm driven by the challenge of transforming complex datasets into actionable insights and building
+                    solutions that have real-world impact. Whether it's healthcare prediction systems or intelligent
+                    recommendation engines, I approach every project with curiosity and precision.
+                </p>
+            </div>
+            <div class="about-highlights">
+                <h3>Key Highlights</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 3.6 GPA in Computer & Communications Engineering</li>
+                    <li><i class="fas fa-check-circle"></i> Top 5% among 3,000+ DEPI trainees</li>
+                    <li><i class="fas fa-check-circle"></i> AI Certified by Microsoft & EFE Egypt</li>
+                    <li><i class="fas fa-check-circle"></i> 97.6% accuracy on diabetes prediction model</li>
+                    <li><i class="fas fa-check-circle"></i> 30% pipeline runtime optimization</li>
+                    <li><i class="fas fa-check-circle"></i> Multiple deployed ML applications</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                <div class="skill-items">
+                    <span class="skill-badge">Python</span>
+                    <span class="skill-badge">C</span>
+                    <span class="skill-badge">C++</span>
+                    <span class="skill-badge">Java</span>
+                    <span class="skill-badge">Dart</span>
+                    <span class="skill-badge">SQL</span>
+                    <span class="skill-badge">VHDL</span>
+                    <span class="skill-badge">HTML</span>
+                    <span class="skill-badge">CSS</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-brain"></i> Machine Learning & AI</h3>
+                <div class="skill-items">
+                    <span class="skill-badge">scikit-learn</span>
+                    <span class="skill-badge">TensorFlow</span>
+                    <span class="skill-badge">Keras</span>
+                    <span class="skill-badge">XGBoost</span>
+                    <span class="skill-badge">Transformers</span>
+                    <span class="skill-badge">SHAP</span>
+                    <span class="skill-badge">LIME</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-line"></i> Data Science & Visualization</h3>
+                <div class="skill-items">
+                    <span class="skill-badge">Pandas</span>
+                    <span class="skill-badge">NumPy</span>
+                    <span class="skill-badge">Tableau</span>
+                    <span class="skill-badge">Matplotlib</span>
+                    <span class="skill-badge">Seaborn</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Frameworks & Tools</h3>
+                <div class="skill-items">
+                    <span class="skill-badge">Streamlit</span>
+                    <span class="skill-badge">Flask</span>
+                    <span class="skill-badge">Firebase</span>
+                    <span class="skill-badge">Git</span>
+                    <span class="skill-badge">Docker</span>
+                    <span class="skill-badge">VS Code</span>
+                    <span class="skill-badge">OpenCV</span>
+                    <span class="skill-badge">NLTK</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Diabetes Risk Prediction System</h3>
+                    <p>
+                        Built a comprehensive machine learning pipeline achieving 97.6% accuracy on 96,000+ medical records.
+                        Implemented SMOTE for class balancing and GridSearchCV for hyperparameter optimization.
+                        Deployed an interactive Streamlit web application with real-time predictions and SHAP-based
+                        explanations for model interpretability.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">XGBoost</span>
+                        <span class="project-tag">Streamlit</span>
+                        <span class="project-tag">SMOTE</span>
+                        <span class="project-tag">GridSearchCV</span>
+                        <span class="project-tag">SHAP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-icon"><i class="fas fa-microscope"></i></div>
+                    <h3>Breast Cancer Diagnosis App</h3>
+                    <p>
+                        Developed a binary classification system using logistic regression with 95%+ precision on the UCI
+                        breast cancer dataset. Created comprehensive EDA dashboards featuring correlation heatmaps,
+                        distribution histograms, and risk group visualizations to help medical professionals understand
+                        diagnostic patterns and patient demographics.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Logistic Regression</span>
+                        <span class="project-tag">Streamlit</span>
+                        <span class="project-tag">UCI Dataset</span>
+                        <span class="project-tag">EDA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-icon"><i class="fas fa-film"></i></div>
+                    <h3>Movie Recommendation System</h3>
+                    <p>
+                        Created an intelligent content-based recommendation engine using TF-IDF vectorization and
+                        cosine similarity algorithms on comprehensive movie metadata. Built an intuitive Streamlit
+                        interface that displays top-9 personalized recommendations with movie posters, detailed
+                        descriptions, and user ratings fetched from TMDb API.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">TF-IDF</span>
+                        <span class="project-tag">NLP</span>
+                        <span class="project-tag">Cosine Similarity</span>
+                        <span class="project-tag">TMDb API</span>
+                        <span class="project-tag">Streamlit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="experience-timeline">
+            <div class="timeline-item">
+                <div class="timeline-date"><i class="fas fa-graduation-cap"></i> Expected July 2027</div>
+                <h3>Bachelor of Engineering in Computer and Communications</h3>
+                <p style="color: #667eea; margin-bottom: 1rem;">University of Alexandria | GPA: 3.6/4.0</p>
+                <p>Specialized coursework in Artificial Intelligence, Machine Learning, Software Engineering, and Data Science. Active participation in research projects and technical competitions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-item-text">
+                        <h4>Email</h4>
+                        <p>es-moustafa.aly2027@alexu.edu.eg</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="contact-item-text">
+                        <h4>Phone</h4>
+                        <p>+20 120 539 2816</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-item-text">
+                        <h4>Location</h4>
+                        <p>Alexandria, Egypt</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project or inquiry..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // Update active nav item
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you as soon as possible.');
+        this.reset();
+    });
+
+    // Scroll animation for sections
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.stat-card, .project-card, .timeline-item, .skill-badge').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+
+    // Active nav on scroll
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>">
+<div class="timeline-date"><i class="fas fa-calendar"></i> October 2024 – June 2025</div>
+<h3>Data Scientist Trainee</h3>
+<p style="color: #667eea; margin-bottom: 1rem;">Digital Egypt Pioneers Initiative (DEPI)</p>
+<ul>
+    <li>Built and deployed machine learning models, reducing pipeline runtime by 30% while increasing prediction accuracy across multiple datasets</li>
+    <li>Delivered production-ready Streamlit-based diabetes risk assessment model achieving 97.6% accuracy and 98% F1 score on imbalanced medical data</li>
+    <li>Conducted extensive exploratory data analysis and created compelling visualizations using Matplotlib and Seaborn on 96,000+ patient records</li>
+    <li>Ranked in the top 5% of 3,000+ trainees nationwide for exceptional technical skills and collaborative contributions to team projects</li>
+</ul>
+</div>
+
+<div class="timeline-item">
+    <div class="timeline-date"><i class="fas fa-certificate"></i> June 2025</div>
+    <h3>AI Certification</h3>
+    <p style="color: #667eea; margin-bottom: 1rem;">Education For Employment (EFE) Egypt × Microsoft</p>
+    <p>Completed comprehensive AI training program covering machine learning fundamentals, neural networks, and practical AI implementation in collaboration with Microsoft's educational initiative.</p>
+</div>
+
+<div class="timeline-item"></div>
